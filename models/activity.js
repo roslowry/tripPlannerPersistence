@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-var Sequelize = require('sequelize');
-var db = require('./_db');
-var Place = require('./place');
+const Sequelize = require('sequelize');
+const db = require('./_db');
+const Place = require('./place');
 
 var Activity = db.define('activity', {
   name: Sequelize.STRING,
@@ -16,5 +16,7 @@ var Activity = db.define('activity', {
     }
   }
 });
+
+
 
 module.exports = Activity

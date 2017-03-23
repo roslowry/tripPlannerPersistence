@@ -15,6 +15,7 @@
  * which take `attraction` objects and pass them to `currentDay`.
  */
 
+
 var tripModule = (function () {
 
   // application state
@@ -48,6 +49,10 @@ var tripModule = (function () {
   function addDay () {
     if (this && this.blur) this.blur(); // removes focus box from buttons
     var newDay = dayModule.create({ number: days.length + 1 }); // dayModule
+    // var newDay = createNewDayPromise()
+    // merge to
+    // push it to daysArray
+
     days.push(newDay);
     if (days.length === 1) {
       currentDay = newDay;

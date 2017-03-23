@@ -1,5 +1,5 @@
 'use strict';
-/* global $ attractionModule hotels restaurants activities */
+/* global $ dataModules attractionModule hotels restaurants activities */
 
 /**
  * This module holds collection of enhanced attraction objects which can be
@@ -11,11 +11,20 @@ var attractionsModule = (function () {
 
   // application state
 
-  var enhanced = {
-    hotels: hotels.map(attractionModule.create),
-    restaurants: restaurants.map(attractionModule.create),
-    activities: activities.map(attractionModule.create),
-  };
+  var enhanced
+  Promise.all([dataModules.hotelPromise,
+      dataModules.restaurantPromise,
+      dataModules.activityPromise])
+  .then(function(data) {
+    var hotels = data[0]
+    var restaurants = data[1]
+    var activities = data[2]
+    enhanced = {
+      hotels: hotels.map(attractionModule.create),
+      restaurants: restaurants.map(attractionModule.create),
+      activities: activities.map(attractionModule.create),
+    };
+  })
 
   // private helper methods (only available inside the module)
 

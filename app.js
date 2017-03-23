@@ -5,6 +5,7 @@ var nunjucks = require('nunjucks');
 var path = require('path');
 
 var db = require('./models');
+const Day = require('./models/dayModel.js')
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.listen(port, function () {
   db.sync()
   .then(function () {
     console.log('Synchronated the database');
+    Day.sync({force: true})
   })
   .catch(function (err) {
     console.error('Trouble right here in River City', err, err.stack);
