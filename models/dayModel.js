@@ -6,17 +6,22 @@ const Restaurant = require('./restaurant')
 const Activity = require('./activity')
 
 const Day = db.define('day', {
-    dayNum: {type: Sequelize.INTEGER,
-            set: function() {
-              dayLength = Day.dayCount()+1
-              this.setDataValue('dayNum', dayLength)
-            }
+    number: {type: Sequelize.INTEGER,
     }
   },
   {
     getterMethods: {
       type: function () {
         return 'day'
+      }
+    },
+    hooks: {
+      beforeValidate: function (day) {
+        Day.dayCount()
+        .then(function(length) {
+          console.log(length+1)
+          day.dayNum = length+1
+        })
       }
     },
     classMethods: {
